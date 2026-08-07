@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agenda y Coyuntura de la Economía Digital en México (2026–2030)</title>
+<style>
+  :root{
+    --navy:#122a48;
+    --navy-soft:#1c3a5e;
+    --blue:#005ab5;
+    --blue-pale:#e9f1fb;
+    --gold:#c99735;
+    --gold-pale:#faf3e2;
+    --red:#b22234;
+    --red-pale:#fbeaea;
+    --green:#1f7a4d;
+    --green-pale:#e9f6ef;
+    --purple:#6a3f8f;
+    --purple-pale:#f1eaf6;
+    --paper:#fbfaf6;
+    --ink:#22272e;
+    --ink-soft:#5a626c;
+    --rule:#d9dee5;
+    --serif: "Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+    --sans: "Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--blue); text-decoration-thickness:1px;}
+  a:hover{color:var(--navy);}
+  p{margin:0 0 14px;}
+  ul, ol{margin:0 0 14px;}
+
+  /* ===== Masthead ===== */
+  header.masthead{
+    background:linear-gradient(155deg,var(--navy) 0%,var(--navy-soft) 100%);
+    color:#eef2f7;
+    padding:52px 22px 40px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.masthead::after{
+    content:"";
+    position:absolute; right:-80px; top:-100px; width:340px; height:340px;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, rgba(201,151,53,0.22), transparent 70%);
+  }
+  .masthead-inner{max-width:980px; margin:0 auto; position:relative; z-index:1;}
+  .eyebrow{
+    font-family:var(--sans); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:#b9c7da; margin:0 0 12px;
+  }
+  h1.title{
+    font-family:var(--serif); font-weight:600; font-size:clamp(28px,4.4vw,44px);
+    margin:0 0 12px; letter-spacing:.2px; line-height:1.15;
+  }
+  .subtitle{
+    font-size:16px; color:#c7d3e2; max-width:700px; margin:0 0 20px;
+  }
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap:10px 22px; font-size:13px; color:#a9bad0;
+    border-top:1px solid rgba(255,255,255,0.14); padding-top:16px; margin-top:10px;
+  }
+  .meta-row b{color:#e7edf5; font-weight:600;}
+
+  /* ===== Nav ===== */
+  nav.toc{
+    position:sticky; top:0; z-index:30;
+    background:rgba(251,250,246,0.95); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--rule);
+    padding:0 22px;
+  }
+  .toc-inner{
+    max-width:980px; margin:0 auto;
+    display:flex; gap:4px; overflow-x:auto; padding:10px 0;
+    scrollbar-width:thin;
+  }
+  .toc-inner a{
+    flex:0 0 auto; white-space:nowrap;
+    font-size:12.5px; font-weight:600; color:var(--navy);
+    padding:7px 12px; border-radius:20px; text-decoration:none;
+    border:1px solid var(--rule);
+  }
+  .toc-inner a:hover{background:var(--blue-pale); border-color:#b9d2ef;}
+
+  /* ===== Layout ===== */
+  main{max-width:980px; margin:0 auto; padding:38px 22px 30px;}
+  section{margin-bottom:56px; scroll-margin-top:64px;}
+
+  .part-label{
+    font-family:var(--sans); font-size:12px; font-weight:700; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--gold); margin-bottom:6px;
+  }
+  h2{
+    font-family:var(--serif); font-size:clamp(24px,3vw,32px); color:var(--navy);
+    margin:0 0 8px; border-bottom:2px solid var(--rule); padding-bottom:12px;
+  }
+  h2 .num{color:var(--gold); margin-right:10px;}
+  .section-intro{font-size:15.5px; color:var(--ink-soft); max-width:760px; margin-bottom:24px;}
+  h3{font-family:var(--serif); font-size:20px; color:var(--blue); margin:28px 0 10px;}
+  h4{font-family:var(--sans); font-size:14.5px; font-weight:700; color:var(--ink); margin:16px 0 8px;}
+
+  .lede{font-size:17px; color:var(--navy); font-weight:500; margin-bottom:18px;}
+
+  /* ===== Callouts ===== */
+  .callout{
+    border-radius:6px; padding:16px 20px; margin:18px 0;
+    border-left:4px solid; font-size:14.5px;
+  }
+  .callout h4{margin-top:0; font-size:14px;}
+  .callout.info{background:var(--blue-pale); border-color:var(--blue);}
+  .callout.warn{background:var(--red-pale); border-color:var(--red);}
+  .callout.gold{background:var(--gold-pale); border-color:var(--gold);}
+  .callout.green{background:var(--green-pale); border-color:var(--green);}
+
+  /* ===== Tables ===== */
+  table{width:100%; border-collapse:collapse; margin:16px 0 22px; font-size:14px;}
+  th{
+    background:var(--navy); color:#fff; text-align:left; font-weight:600;
+    padding:10px 12px; font-size:12.5px; letter-spacing:.02em;
+  }
+  td{padding:10px 12px; border-bottom:1px solid var(--rule); vertical-align:top;}
+  tr:nth-child(even) td{background:#f6f7f9;}
+  .wrap-table{overflow-x:auto;}
+
+  /* ===== Timeline ===== */
+  .timeline{border-left:2px solid var(--rule); margin:20px 0 20px 8px; padding-left:22px;}
+  .tl-item{position:relative; margin-bottom:18px;}
+  .tl-item::before{
+    content:""; position:absolute; left:-28px; top:4px; width:11px; height:11px;
+    border-radius:50%; background:var(--gold); border:2px solid var(--paper);
+  }
+  .tl-date{font-size:12px; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:.04em;}
+  .tl-title{font-size:14.5px; font-weight:600; color:var(--navy); margin:2px 0 3px;}
+  .tl-desc{font-size:13.5px; color:var(--ink-soft);}
+
+  /* ===== Cards ===== */
+  .card-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:14px; margin:18px 0;}
+  .player-card{
+    border:1px solid var(--rule); border-radius:8px; padding:16px 18px; background:#fff;
+  }
+  .player-card .pc-name{font-family:var(--serif); font-size:16.5px; color:var(--navy); font-weight:700; margin-bottom:4px;}
+  .player-card .pc-tag{
+    display:inline-block; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em;
+    padding:2px 8px; border-radius:12px; margin-bottom:8px;
+  }
+  .player-card .pc-desc{font-size:13px; color:var(--ink-soft);}
+  .tag-empresa{background:var(--blue-pale); color:var(--blue);}
+  .tag-gobierno{background:var(--gold-pale); color:#8a6a1f;}
+  .tag-asociacion{background:var(--green-pale); color:var(--green);}
+  .tag-organismo{background:var(--purple-pale); color:var(--purple);}
+
+  /* ===== Link channel cards ===== */
+  .channel-card{
+    border:1px solid var(--rule); border-radius:8px; padding:18px 20px; background:#fff;
+    margin-bottom:14px;
+  }
+  .channel-card .ch-head{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;}
+  .channel-card .ch-name{font-family:var(--serif); font-size:17px; color:var(--navy); font-weight:700;}
+  .channel-card .ch-type{font-size:11px; font-weight:700; text-transform:uppercase; color:var(--gold); letter-spacing:.04em;}
+  .channel-card .ch-desc{font-size:14px; color:var(--ink-soft); margin:8px 0 10px;}
+  .channel-card .ch-link{font-size:13.5px; font-weight:600;}
+  .channel-card .ch-link a{
+    display:inline-block; background:var(--navy); color:#fff; padding:6px 14px; border-radius:5px;
+    text-decoration:none; font-size:12.5px;
+  }
+  .channel-card .ch-link a:hover{background:var(--navy-soft); color:#fff;}
+
+  .channel-group-title{
+    font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft);
+    margin:26px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--rule);
+  }
+
+  /* ===== Action plan ===== */
+  .axis-block{border:1px solid var(--rule); border-radius:8px; margin-bottom:16px; overflow:hidden;}
+  .axis-head{
+    background:var(--navy); color:#fff; padding:12px 18px; display:flex; align-items:center; gap:12px;
+  }
+  .axis-num{
+    font-family:var(--serif); font-size:20px; font-weight:700; color:var(--gold);
+    width:32px; height:32px; border-radius:50%; background:rgba(255,255,255,0.1);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .axis-title{font-family:var(--serif); font-size:17px; font-weight:600;}
+  .axis-body{padding:16px 18px;}
+  .axis-body .lbl{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--gold); margin:10px 0 4px;}
+  .axis-body .lbl:first-child{margin-top:0;}
+  .horizon-row{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;}
+  .horizon-chip{
+    font-size:11px; font-weight:700; padding:3px 10px; border-radius:12px;
+  }
+  .h-corto{background:var(--red-pale); color:var(--red);}
+  .h-mediano{background:var(--gold-pale); color:#8a6a1f;}
+  .h-largo{background:var(--green-pale); color:var(--green);}
+
+  footer{
+    text-align:center; font-size:12px; color:var(--ink-soft); padding:26px 22px 46px;
+    border-top:1px solid var(--rule); margin-top:20px;
+  }
+  footer a{color:var(--ink-soft);}
+
+  .src-note{font-size:11.5px; color:#8a92a0; margin-top:4px; font-style:italic;}
+
+  @media (max-width:600px){
+    .card-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <p class="eyebrow">Economía Digital · ITESM Campus Santa Fe · Recurso de vinculación profesional</p>
+    <h1 class="title">Agenda y Coyuntura de la Economía Digital en México</h1>
+    <p class="subtitle">Un análisis a profundidad del entorno institucional, regulatorio y de mercado que define la economía digital mexicana hoy, un plan de acción hacia 2026–2030, un mapa de los actores clave, y canales reales para que profundices tu vinculación con este ecosistema.</p>
+    <div class="meta-row">
+      <span><b>4 partes</b> · lectura de referencia</span>
+      <span><b>Fuentes primarias</b>: CEDIG / Centro-i, DOF, asociaciones sectoriales</span>
+      <span><b>Actualizado</b>: agosto de 2026</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#parte1">I. Agenda y coyuntura</a>
+    <a href="#parte2">II. Plan de acción 2026–2030</a>
+    <a href="#parte3">III. Quién es quién</a>
+    <a href="#parte4">IV. Canales de vinculación</a>
+    <a href="#fuentes">Fuentes</a>
+  </div>
+</nav>
+
+<main>
+
+<section id="intro">
+<p class="lede">La economía digital mexicana no se está discutiendo, en 2026, en el vacío académico: se está discutiendo en salas de juntas, en el Diario Oficial de la Federación y en las mesas de renegociación del T-MEC, con una velocidad de cambio institucional que rara vez se ve en otros sectores de política pública. Este documento traduce esa coyuntura --tal como la están procesando los actores que la viven de cerca-- en un recurso que puedes usar tanto para tus entregables del curso como para decidir, de forma informada, en qué organización, consejo o programa te conviene involucrarte si este campo te interesa profesionalmente.</p>
+
+<div class="callout info">
+<h4>Fuente central de este documento</h4>
+El eje empírico de este análisis es el <a href="https://centroi.org/consejo-ejecutivo-de-la-economia-digital/" target="_blank" rel="noopener">Consejo Ejecutivo de la Economía Digital (CEDIG)</a>, un consejo privado de alto nivel creado en 2024 por <b>Centro-i para la Sociedad del Futuro</b>, que reúne trimestralmente a empresas líderes, personas expertas y --de forma indirecta, a través de invitados-- a la autoridad, bajo reglas de Chatham House. Sus documentos de conclusiones, de acceso público, son una de las fuentes más actualizadas y mejor informadas sobre el estado real de la agenda digital mexicana.
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PARTE I -->
+<!-- ============================================================ -->
+<section id="parte1">
+<div class="part-label">Parte I</div>
+<h2><span class="num">01</span>Agenda y coyuntura de la economía digital en México</h2>
+<p class="section-intro">Seis frentes activos, en este momento, están definiendo la trayectoria de la economía digital mexicana. Ninguno se entiende bien de forma aislada: son, como advierte el propio CEDIG, un ecosistema profundamente interconectado.</p>
+
+<h3>1.1 El nuevo mapa institucional: menos autonomía, más ejecutivo</h3>
+<p>El cambio de mayor calado en el entorno regulatorio digital mexicano de los últimos dos años no ocurrió en una ley de inteligencia artificial ni en una reforma de telecomunicaciones dedicada: ocurrió en la reforma constitucional de "simplificación orgánica" de noviembre de 2024, que eliminó siete organismos autónomos del Estado mexicano. Tres de ellos son centrales para cualquier análisis de la economía digital:</p>
+
+<div class="wrap-table">
+<table>
+<tr><th>Organismo desaparecido</th><th>Función que ejercía</th><th>Quién asume la función ahora</th></tr>
+<tr><td><b>IFT</b> (Instituto Federal de Telecomunicaciones)</td><td>Regulación técnica y de competencia de telecomunicaciones y radiodifusión desde 2013, con autonomía constitucional</td><td><b>Comisión Reguladora de Telecomunicaciones (CRT)</b>, órgano administrativo desconcentrado adscrito a la ATDT (extinguió operaciones el 17 de octubre de 2025)</td></tr>
+<tr><td><b>Cofece</b> (Comisión Federal de Competencia Económica)</td><td>Autoridad antimonopolio para el resto de la economía</td><td><b>Comisión Nacional Antimonopolio (CNA)</b>, organismo descentralizado de la Secretaría de Economía</td></tr>
+<tr><td><b>INAI</b> (Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales)</td><td>Autoridad autónoma de transparencia y protección de datos personales</td><td><b>Secretaría Anticorrupción y Buen Gobierno (SABG)</b> asume protección de datos; <b>Transparencia para el Pueblo</b> asume acceso a la información (ambos desde el 9 de mayo de 2025)</td></tr>
+</table>
+</div>
+
+<p>El patrón común a los tres casos es el mismo: organismos que antes operaban con autonomía constitucional --designación por mayoría calificada del Senado, presupuesto propio, resoluciones colegiadas-- pasan a operar como órganos desconcentrados o descentralizados, más cerca del Ejecutivo. Para el análisis de este curso, este es exactamente el tipo de decisión de diseño institucional que se discute en la Sesión 4 al comparar regulación <i>ex ante</i> independiente (el modelo de la DMA europea) frente a modelos con menor independencia regulatoria: México se movió, en 2025, en la dirección contraria a la que siguen la mayoría de las jurisdicciones que regulan agresivamente a las plataformas digitales.</p>
+
+<div class="callout warn">
+<h4>Por qué esto importa más allá de lo institucional</h4>
+El propio CEDIG, en su documento <i>T-MEC Digital</i> (mayo de 2026), señala una contradicción de fondo: el gobierno mexicano impulsa simultáneamente iniciativas de inclusión digital y de <i>reskilling</i> en IA, mientras debilita --con esta misma reforma-- los contrapesos regulatorios que sostienen la neutralidad competitiva comprometida en el T-MEC. La pregunta de si México se alineará con estándares de protección de datos más cercanos a Estados Unidos o a la Unión Europea, señala el documento, "sigue sin resolverse" tras la desaparición del INAI.
+</div>
+
+<h3>1.2 Quién gobierna ahora: la Agencia de Transformación Digital y Telecomunicaciones (ATDT)</h3>
+<p>Mientras la CRT y la CNA heredan funciones regulatorias, la conducción de la política digital del Estado mexicano se concentró, desde el 1 de enero de 2025, en una nueva dependencia de rango de Secretaría de Estado: la <b>Agencia de Transformación Digital y Telecomunicaciones (ATDT)</b>, encabezada por José Peña Merino. La ATDT absorbió a la antigua Coordinación de Estrategia Digital Nacional y hoy conduce, entre otras cosas, la política de identidad digital (<b>Llave MX</b>, construida sobre la CURP), la política de gobierno digital, y --a través de su Programa Sectorial 2025--2030-- la meta de cerrar la brecha de conectividad.</p>
+
+<div class="callout gold">
+<h4>El tamaño real de la brecha, según datos oficiales de la propia ATDT</h4>
+10.2 millones de personas en México no pueden acceder a internet porque viven en zonas sin cobertura móvil 4G; 4.4 millones adicionales viven en zonas con cobertura, pero no cuentan con los ingresos suficientes para contratar el servicio (ATDT, con datos de Coneval, INEGI y Promtel). Es decir: el reto de conectividad mexicano ya no es únicamente de infraestructura --es, en más de un tercio de los casos, un problema de asequibilidad.
+</div>
+
+<h3>1.3 El T-MEC digital: la geopolítica que ya está aquí</h3>
+<p>Ningún tema concentra tanta atención del sector privado digital mexicano en 2026 como la revisión del T-MEC. El CEDIG dedicó tres de sus cuatro sesiones más recientes exclusivamente a este tema, y sus conclusiones son notablemente directas para tratarse de un consejo que opera bajo reglas de confidencialidad parcial (Chatham House). Algunos hallazgos centrales:</p>
+<ul>
+<li><b>El capítulo de comercio digital del T-MEC está bien construido</b> y no se anticipa --ni se considera deseable-- una renegociación profunda. El riesgo real es que sus disposiciones se conviertan en "letra muerta" si no avanza su implementación efectiva.</li>
+<li><b>Los obstáculos principales están "en casa", no en el tratado</b>: costos elevados del espectro radioeléctrico, impuestos especiales a telecomunicaciones, y un marco fiscal-regulatorio que contradice los compromisos de neutralidad competitiva del propio T-MEC.</li>
+<li><b>La capacidad negociadora mexicana se ha erosionado.</b> La Secretaría de Economía perdió a gran parte de su equipo de negociadores con 15 a 18 años de experiencia desde el inicio de la administración actual, y el histórico "cuarto de junto" --el mecanismo de consulta directa al sector privado durante negociaciones comerciales-- se reestructuró como órgano consultivo a través de cámaras, reduciendo la interlocución directa.</li>
+<li><b>La protección de datos transfronterizos es el punto más débil.</b> Los marcos normativos siguen operando con lógica de localización física de los datos, en un mundo donde --sobre todo con IA-- los datos existen simultáneamente en múltiples jurisdicciones.</li>
+<li><b>El comercio digital necesita redefinirse</b> para incluir los servicios entregados digitalmente --un área donde México tiene, según el CEDIG, potencial exportador real pero carece de estrategia explícita.</li>
+</ul>
+
+<h3>1.4 Pagos digitales: la paradoja mexicana del acceso sin uso</h3>
+<p>La sesión más reciente del CEDIG (junio de 2026) documenta, con datos concretos, una de las paradojas más citadas de la economía digital mexicana: el país tiene más de 145 millones de líneas móviles y más del 80% de las personas adultas cuenta con al menos un producto financiero formal --pero cerca del <b>85% de los pagos menores a 500 pesos siguen realizándose en efectivo</b>, pese a la disponibilidad de SPEI, CoDi, DiMo y tarjetas. La comparación que el propio consejo usa para explicar por qué es reveladora: México y Brasil tienen infraestructura de pagos instantáneos equivalente (CoDi y PIX, respectivamente), pero Brasil logró adopción masiva porque convirtió la captación de usuarios en un activo competitivo para los bancos, mientras México estableció la obligación regulatoria sin el incentivo correspondiente --CoDi existe, pero prácticamente nadie lo usa.</p>
+
+<div class="callout green">
+<h4>Una señal reciente de que el regulador está reaccionando</h4>
+Después de la sesión de junio de 2026, el Banco de México publicó una circular (DOF, 17 de junio de 2026) que obliga a bancos, fintechs y proveedores de pago a estandarizar la experiencia de usuario en transferencias electrónicas desde aplicaciones móviles --una respuesta directa, aunque parcial, al diagnóstico de fricción de uso documentado por el CEDIG.
+</div>
+
+<p>El consejo identifica también a las pymes como el punto de mayor apalancamiento pendiente: generan cerca del 72% del empleo del país, pero tienen acceso muy limitado al crédito formal y baja aceptación de pagos digitales --de modo que digitalizar de forma sostenible incluso una fracción de ellas podría traducirse en una contribución sustantiva a la productividad agregada nacional.</p>
+
+<h3>1.5 Identidad digital: la CURP digital y el debate sobre cómo, no sobre si</h3>
+<p>México avanza hacia un sistema de identidad digital único (Llave MX, sobre la base de la CURP), y el CEDIG dedicó una sesión completa en 2025 a esta discusión con la participación de especialistas internacionales, incluido el director de tecnologías de identidad del RENAPER argentino. La conclusión central del consejo no cuestiona la necesidad del sistema, sino su arquitectura: recomienda explícitamente la <b>descentralización</b> --evitar un repositorio único de biometría y registros, que concentraría el atractivo para atacantes y facilitaría la trazabilidad masiva de la vida de cada ciudadano-- y el principio de <b>"verificar, no recopilar"</b>: minimizar las instancias de almacenamiento y captura de datos biométricos, en lugar de centralizarlos.</p>
+
+<h3>1.6 El ecosistema fintech y de comercio electrónico: la escala ya está aquí</h3>
+<p>Independientemente del debate regulatorio, el mercado ya se movió. México cuenta hoy con alrededor de 1,000 empresas fintech activas --un crecimiento del 18% respecto al año anterior y muy por encima de las 158 que existían en 2016--, consolidándose como el segundo ecosistema fintech más grande de América Latina, solo detrás de Brasil, con una proyección de 86 millones de usuarios de servicios fintech hacia 2027. El comercio electrónico crece de forma sostenida y cada vez más omnicanal, según el <a href="https://amvo.org.mx/" target="_blank" rel="noopener">Estudio de Venta Online</a> que la AMVO publica anualmente. El reto, documentado de forma consistente por el CEDIG, no es de oferta tecnológica: es de habilitadores fiscales, de confianza y de diseño de incentivos que aún están pendientes.</p>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- PARTE II -->
+<!-- ============================================================ -->
+<section id="parte2">
+<div class="part-label">Parte II</div>
+<h2><span class="num">02</span>Plan de acción: problemas, retos y prioridades hacia 2026–2030</h2>
+<p class="section-intro">Siete ejes concentran los principales problemas, retos y acciones prioritarias identificados a partir del diagnóstico anterior. Cada uno incluye un horizonte de implementación aproximado: corto plazo (2026–2027), mediano plazo (2027–2028) y largo plazo (2028–2030).</p>
+
+<div class="axis-block">
+<div class="axis-head"><div class="axis-num">1</div><div class="axis-title">Gobernanza regulatoria e institucional</div></div>
+<div class="axis-body">
+<div class="lbl">Problema central</div>
+<p>La transición de reguladores autónomos (IFT, Cofece, INAI) a órganos con mayor cercanía al Ejecutivo genera incertidumbre sobre la independencia técnica de las decisiones de competencia, telecomunicaciones y protección de datos --precisamente cuando el T-MEC exige neutralidad competitiva verificable.</p>
+<div class="lbl">Acciones prioritarias</div>
+<ul>
+<li>Publicar, con plazos verificables, el esquema operativo definitivo de la CRT y la CNA, incluyendo mecanismos de rendición de cuentas técnica frente al sector privado y la sociedad civil.</li>
+<li>Reconstruir de forma ágil la capacidad de negociación comercial especializada perdida en la Secretaría de Economía.</li>
+<li>Clarificar el estatus jurídico de los criterios interpretativos previamente emitidos por el INAI, hoy en un vacío normativo.</li>
+</ul>
+<div class="horizon-row"><span class="horizon-chip h-corto">Corto plazo</span></div>
+</div>
+</div>
+
+<div class="axis-block">
+<div class="axis-head"><div class="axis-num">2</div><div class="axis-title">Implementación efectiva del capítulo digital del T-MEC</div></div>
+<div class="axis-body">
+<div class="lbl">Problema central</div>
+<p>Un capítulo de comercio digital bien diseñado corre el riesgo de quedar como "letra muerta" si México no alinea su política fiscal y regulatoria interna con los compromisos ya adquiridos, y si no amplía el concepto de comercio digital para incluir servicios entregados digitalmente.</p>
+<div class="lbl">Acciones prioritarias</div>
+<ul>
+<li>Auditar la congruencia entre reformas internas recientes (fiscal, de datos, de competencia) y los compromisos de neutralidad competitiva del T-MEC.</li>
+<li>Desarrollar una estrategia nacional de exportación de servicios digitales, hoy inexistente pese al potencial identificado por el propio sector privado.</li>
+<li>Negociar cláusulas de reconocimiento mutuo de firmas electrónicas y certificados de origen digital durante la revisión del tratado.</li>
+</ul>
+<div class="horizon-row"><span class="horizon-chip h-corto">Corto plazo</span><span class="horizon-chip h-mediano">Mediano plazo</span></div>
+</div>
+</div>
+
+<div class="axis-block">
+<div class="axis-head"><div class="axis-num">3</div><div class="axis-title">Gobernanza de datos e inteligencia artificial</div></div>
+<div class="axis-body">
+<div class="lbl">Problema central</div>
+<p>Los marcos normativos de flujo transfronterizo de datos siguen operando con lógica de localización física, en un entorno donde los datos --y los modelos de IA que los usan-- existen simultáneamente en múltiples jurisdicciones. No existen estándares regionales comunes de ciberseguridad.</p>
+<div class="lbl">Acciones prioritarias</div>
+<ul>
+<li>Priorizar la regulación de datos (quién accede, con qué propósito, bajo qué auditoría) antes que la regulación directa de los modelos de IA, como recomienda explícitamente el CEDIG.</li>
+<li>Explorar un anexo de principios de IA dentro del T-MEC, potencialmente articulado desde el capítulo de competitividad más que desde el capítulo digital.</li>
+<li>Desarrollar estándares regionales mínimos de ciberseguridad junto con Estados Unidos y Canadá.</li>
+</ul>
+<div class="horizon-row"><span class="horizon-chip h-mediano">Mediano plazo</span><span class="horizon-chip h-largo">Largo plazo</span></div>
+</div>
+</div>
+
+<div class="axis-block">
+<div class="axis-head"><div class="axis-num">4</div><div class="axis-title">Identidad digital segura y descentralizada</div></div>
+<div class="axis-body">
+<div class="lbl">Problema central</div>
+<p>El sistema de identidad digital único (Llave MX/CURP digital) es necesario para habilitar buena parte de la agenda de inclusión, pero un diseño centralizado de datos biométricos concentraría el riesgo sistémico ante un eventual ataque.</p>
+<div class="lbl">Acciones prioritarias</div>
+<ul>
+<li>Publicar lineamientos técnicos detallados antes de cualquier despliegue masivo adicional.</li>
+<li>Ejecutar pilotos sectoriales acotados (banca, telecomunicaciones, salud) antes de escalar nacionalmente.</li>
+<li>Adoptar de forma explícita el principio "verificar, no recopilar" en el diseño técnico del sistema.</li>
+</ul>
+<div class="horizon-row"><span class="horizon-chip h-corto">Corto plazo</span></div>
+</div>
+</div>
+
+<div class="axis-block">
+<div class="axis-head"><div class="axis-num">5</div><div class="axis-title">Pagos digitales e inclusión financiera de las pymes</div></div>
+<div class="axis-body">
+<div class="lbl">Problema central</div>
+<p>México tiene la infraestructura y la penetración móvil para una economía de pagos digitales madura, pero la conversión a uso transaccional real sigue siendo baja --por costumbre, desconfianza y ausencia de incentivos fiscales, no por falta de tecnología.</p>
+<div class="lbl">Acciones prioritarias</div>
+<ul>
+<li>Diseñar incentivos fiscales explícitos para la adopción de pagos digitales (cashback, sorteos fiscales, factura electrónica madura), replicando el éxito ya documentado de la factura electrónica mexicana en otro dominio.</li>
+<li>Rediseñar la dispersión de transferencias sociales para que una mayor proporción circule digitalmente en lugar de retirarse de inmediato en efectivo.</li>
+<li>Evolucionar el rol del regulador financiero de la autorización exhaustiva hacia un modelo habilitador basado en principios y supervisión proporcional.</li>
+</ul>
+<div class="horizon-row"><span class="horizon-chip h-corto">Corto plazo</span><span class="horizon-chip h-mediano">Mediano plazo</span></div>
+</div>
+</div>
+
+<div class="axis-block">
+<div class="axis-head"><div class="axis-num">6</div><div class="axis-title">Conectividad como derecho habilitante</div></div>
+<div class="axis-body">
+<div class="lbl">Problema central</div>
+<p>10.2 millones de personas carecen de cobertura 4G y 4.4 millones adicionales no pueden costear el servicio disponible. El marco fiscal actual trata a las telecomunicaciones como un lujo gravable, no como la infraestructura habilitante de educación, salud y seguridad que efectivamente es.</p>
+<div class="lbl">Acciones prioritarias</div>
+<ul>
+<li>Actualizar el esquema fiscal-regulatorio del espectro radioeléctrico y los impuestos especiales a telecomunicaciones.</li>
+<li>Escalar soluciones de conectividad satelital para las zonas de orografía compleja identificadas por la propia ATDT.</li>
+<li>Diseñar subsidios de asequibilidad focalizados para la población con cobertura pero sin ingreso suficiente para contratarla.</li>
+</ul>
+<div class="horizon-row"><span class="horizon-chip h-mediano">Mediano plazo</span><span class="horizon-chip h-largo">Largo plazo</span></div>
+</div>
+</div>
+
+<div class="axis-block">
+<div class="axis-head"><div class="axis-num">7</div><div class="axis-title">Talento y capacidades digitales</div></div>
+<div class="axis-body">
+<div class="lbl">Problema central</div>
+<p>Existen múltiples iniciativas gubernamentales de capacitación en IA (incluido el Laboratorio Nacional de IA) y una oferta creciente de programas privados y de sociedad civil, pero falta articulación estratégica, recursos suficientes, y una plataforma que identifique y escale las experiencias exitosas.</p>
+<div class="lbl">Acciones prioritarias</div>
+<ul>
+<li>Crear un inventario público y unificado de iniciativas de formación en habilidades digitales e IA, gubernamentales y privadas.</li>
+<li>Fortalecer alianzas escalables entre gobierno, sector privado y organizaciones de sociedad civil (véase la Parte IV de este documento).</li>
+<li>Priorizar la formación de talento negociador y regulatorio técnico, no solo talento técnico-digital, dada la pérdida de capacidad documentada en el eje 1.</li>
+</ul>
+<div class="horizon-row"><span class="horizon-chip h-mediano">Mediano plazo</span><span class="horizon-chip h-largo">Largo plazo</span></div>
+</div>
+</div>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- PARTE III -->
+<!-- ============================================================ -->
+<section id="parte3">
+<div class="part-label">Parte III</div>
+<h2><span class="num">03</span>Quién es quién: participación e intereses de los actores clave</h2>
+<p class="section-intro">Cuatro tipos de actores concentran, hoy, la conversación sobre economía digital en México: empresas privadas de escala regional o global, el nuevo aparato de gobierno digital, asociaciones sectoriales, y organismos de convocatoria multisectorial.</p>
+
+<h3>Empresas miembro del CEDIG (2026)</h3>
+<p style="font-size:14px; color:var(--ink-soft);">Su interés común es tener un canal de interlocución estructurado con el gobierno y entre sí sobre el entorno regulatorio que afecta directamente sus modelos de negocio --desde espectro radioeléctrico hasta flujo de datos e inteligencia artificial.</p>
+<div class="card-grid">
+<div class="player-card"><div class="pc-name">América Móvil</div><span class="pc-tag tag-empresa">Telecomunicaciones</span><div class="pc-desc">El operador de telecomunicaciones dominante en México; interés directo en el marco fiscal del espectro y en la neutralidad competitiva frente a operadores estatales.</div></div>
+<div class="player-card"><div class="pc-name">AT&amp;T y Telefónica</div><span class="pc-tag tag-empresa">Telecomunicaciones</span><div class="pc-desc">Operadores con inversión extranjera directa; particularmente sensibles a la certidumbre regulatoria post-IFT y a la interoperabilidad de pagos.</div></div>
+<div class="player-card"><div class="pc-name">Apple y Google</div><span class="pc-tag tag-empresa">Plataformas y dispositivos</span><div class="pc-desc">Interés en gobernanza de datos, flujo transfronterizo, y el marco de IA que aplicará a sus productos y servicios en México.</div></div>
+<div class="player-card"><div class="pc-name">Meta y TikTok</div><span class="pc-tag tag-empresa">Plataformas y redes sociales</span><div class="pc-desc">Interés central en responsabilidad de intermediarios, moderación de contenido y flujo transfronterizo de datos de usuarios.</div></div>
+<div class="player-card"><div class="pc-name">Didi</div><span class="pc-tag tag-empresa">Movilidad y plataformas de dos lados</span><div class="pc-desc">Interés directo en la regulación de plataformas de movilidad, pagos digitales y el estatus laboral de conductores.</div></div>
+<div class="player-card"><div class="pc-name">Ericsson</div><span class="pc-tag tag-empresa">Infraestructura de red</span><div class="pc-desc">Proveedor de infraestructura 5G/6G; interés en la política de espectro y en el Programa Sectorial de la ATDT.</div></div>
+<div class="player-card"><div class="pc-name">Gentera</div><span class="pc-tag tag-empresa">Microfinanzas / inclusión financiera</span><div class="pc-desc">Grupo financiero enfocado en inclusión (Banco Compartamos); voz relevante en la paradoja señalada por el propio CEDIG entre crecimiento de microfinanzas y estancamiento macroeconómico.</div></div>
+</div>
+
+<h3>El nuevo aparato de gobierno digital</h3>
+<div class="card-grid">
+<div class="player-card"><div class="pc-name">ATDT</div><span class="pc-tag tag-gobierno">Gobierno federal</span><div class="pc-desc">Conduce la política de inclusión digital, gobierno digital e identidad única (Llave MX); Secretaría de Estado encabezada por José Peña Merino.</div></div>
+<div class="player-card"><div class="pc-name">CRT</div><span class="pc-tag tag-gobierno">Gobierno federal</span><div class="pc-desc">Comisión Reguladora de Telecomunicaciones; hereda la supervisión de competencia y acceso equitativo en telecomunicaciones que antes ejercía el IFT.</div></div>
+<div class="player-card"><div class="pc-name">CNA</div><span class="pc-tag tag-gobierno">Gobierno federal</span><div class="pc-desc">Comisión Nacional Antimonopolio, adscrita a la Secretaría de Economía; hereda las funciones de competencia económica de Cofece.</div></div>
+<div class="player-card"><div class="pc-name">Banco de México y CNBV</div><span class="pc-tag tag-gobierno">Autoridad financiera</span><div class="pc-desc">Reguladores del sistema de pagos y del sector financiero; emisores recientes de circulares de estandarización de experiencia de usuario en pagos móviles.</div></div>
+</div>
+
+<h3>Asociaciones sectoriales y de industria</h3>
+<div class="card-grid">
+<div class="player-card"><div class="pc-name">AMITI</div><span class="pc-tag tag-asociacion">Industria de TI</span><div class="pc-desc">Asociación Mexicana de la Industria de Tecnologías de Información; representa a empresas que generan cerca del 7% del PIB nacional y más de 200 mil empleos directos.</div></div>
+<div class="player-card"><div class="pc-name">CANIETI</div><span class="pc-tag tag-asociacion">Industria electrónica y TIC</span><div class="pc-desc">Cámara Nacional de la Industria Electrónica, Telecomunicaciones y Tecnologías de la Información; agrupa a más de 1,000 empresas, con Talent Hub propio para vinculación de talento joven.</div></div>
+<div class="player-card"><div class="pc-name">AMVO</div><span class="pc-tag tag-asociacion">Comercio electrónico</span><div class="pc-desc">Asociación Mexicana de Venta Online; produce el Estudio de Venta Online, la referencia anual sobre el estado del e-commerce mexicano.</div></div>
+<div class="player-card"><div class="pc-name">Asociación FinTech México</div><span class="pc-tag tag-asociacion">Tecnología financiera</span><div class="pc-desc">Representa a cerca de 1,000 empresas fintech; publica el Reporte FinTech México anual y organiza el FinTech México Festival.</div></div>
+</div>
+
+<h3>Organismos de convocatoria multisectorial</h3>
+<div class="card-grid">
+<div class="player-card"><div class="pc-name">Centro-i / CEDIG</div><span class="pc-tag tag-organismo">Think tank y consejo</span><div class="pc-desc">Impulsa el Consejo Ejecutivo de la Economía Digital; la fuente primaria central de este documento y un espacio de generación de conocimiento accesible al público a través de sus informes.</div></div>
+<div class="player-card"><div class="pc-name">Voces técnicas invitadas al CEDIG</div><span class="pc-tag tag-organismo">Expertas y expertos</span><div class="pc-desc">Ex negociadoras comerciales como Beatriz Leycegui Gardoqui y Roberta Lajous, y especialistas en pagos, identidad digital y regulación financiera, aportan perspectiva técnica independiente a las sesiones.</div></div>
+</div>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- PARTE IV -->
+<!-- ============================================================ -->
+<section id="parte4">
+<div class="part-label">Parte IV</div>
+<h2><span class="num">04</span>Canales reales de vinculación para estudiantes</h2>
+<p class="section-intro">Esta sección enlaza directamente a organizaciones, programas y espacios reales --no hipotéticos-- donde puedes profundizar tu conocimiento de la economía digital mexicana y construir una red profesional en el sector. Verifica siempre la convocatoria vigente en el sitio oficial, ya que las fechas y requisitos cambian.</p>
+
+<div class="channel-group-title">Consejos, informes y contenido especializado</div>
+
+<div class="channel-card">
+<div class="ch-head"><span class="ch-name">Centro-i para la Sociedad del Futuro / CEDIG</span><span class="ch-type">Think tank</span></div>
+<div class="ch-desc">Sigue sus informes trimestrales de conclusiones, su podcast y su boletín para tener acceso directo y gratuito al pulso de la agenda digital mexicana --la misma fuente usada para construir este documento.</div>
+<div class="ch-link"><a href="https://centroi.org/consejo-ejecutivo-de-la-economia-digital/" target="_blank" rel="noopener">Visitar CEDIG →</a> &nbsp; <a href="https://centroi.org/podcast/" target="_blank" rel="noopener">Podcast →</a> &nbsp; <a href="mailto:contacto@centroi.org">contacto@centroi.org</a></div>
+</div>
+
+<div class="channel-card">
+<div class="ch-head"><span class="ch-name">Reporte FinTech México</span><span class="ch-type">Publicación anual</span></div>
+<div class="ch-desc">El diagnóstico de referencia del ecosistema fintech mexicano, con capítulos sobre regulación, inclusión financiera y tendencias tecnológicas --gratuito y descargable.</div>
+<div class="ch-link"><a href="https://www.fintechmexico.org/" target="_blank" rel="noopener">Visitar Asociación FinTech México →</a></div>
+</div>
+
+<div class="channel-card">
+<div class="ch-head"><span class="ch-name">Estudio de Venta Online (AMVO)</span><span class="ch-type">Publicación anual + webinars</span></div>
+<div class="ch-desc">Datos y webinars abiertos sobre la evolución del comercio electrónico mexicano, publicados por la asociación del sector.</div>
+<div class="ch-link"><a href="https://amvo.org.mx/" target="_blank" rel="noopener">Visitar AMVO →</a></div>
+</div>
+
+<div class="channel-group-title">Asociaciones profesionales con espacios para talento joven</div>
+
+<div class="channel-card">
+<div class="ch-head"><span class="ch-name">CANIETI — Talent Hub</span><span class="ch-type">Networking y vinculación laboral</span></div>
+<div class="ch-desc">La cámara de la industria electrónica y de TIC mantiene un espacio específico de vinculación de talento (Talent Hub) y una agenda activa de networking y eventos sectoriales.</div>
+<div class="ch-link"><a href="https://canieti.org/" target="_blank" rel="noopener">Visitar CANIETI →</a></div>
+</div>
+
+<div class="channel-card">
+<div class="ch-head"><span class="ch-name">AMITI</span><span class="ch-type">Asociación de industria</span></div>
+<div class="ch-desc">Organiza comités temáticos abiertos a la colaboración de sus más de 300 empresas socias en la definición de la agenda de transformación digital del país.</div>
+<div class="ch-link"><a href="https://amiti.org.mx/" target="_blank" rel="noopener">Visitar AMITI →</a></div>
+</div>
+
+<div class="channel-card">
+<div class="ch-head"><span class="ch-name">FINNOSUMMIT y Open Finance</span><span class="ch-type">Eventos y conferencias</span></div>
+<div class="ch-desc">Los eventos insignia del ecosistema fintech latinoamericano, con acceso a reguladores, fundadores de startups e inversionistas de capital de riesgo --puntos de entrada reales para hacer networking en el sector.</div>
+<div class="ch-link"><a href="https://www.finnosummit.com/" target="_blank" rel="noopener">Visitar FINNOSUMMIT →</a> &nbsp; <a href="https://www.fintechmexico.org/eventos" target="_blank" rel="noopener">Eventos FinTech México →</a></div>
+</div>
+
+<div class="channel-group-title">Formación, mentoría y primeras experiencias profesionales</div>
+
+<div class="channel-card">
+<div class="ch-head"><span class="ch-name">Junior Achievement México — Mujer Digital</span><span class="ch-type">Formación + mentoría + vinculación laboral</span></div>
+<div class="ch-desc">Programa de formación técnica en tecnología (incluida ciberseguridad), con certificación internacional, mentorías personalizadas y conexión directa con vacantes reales en la industria --con más de 2,150 mujeres jóvenes formadas en México.</div>
+<div class="ch-link"><a href="https://www.jamexico.org.mx/" target="_blank" rel="noopener">Visitar JA México →</a> &nbsp; <a href="https://www.jamexico.org.mx/programasmx" target="_blank" rel="noopener">Ver programas →</a></div>
+</div>
+
+<div class="channel-card">
+<div class="ch-head"><span class="ch-name">POSiBLE</span><span class="ch-type">Emprendimiento e innovación</span></div>
+<div class="ch-desc">Programa que ofrece herramientas, contactos y recursos para impulsar el emprendimiento innovador en México --relevante si tu interés es fundar o unirte a una startup digital.</div>
+<div class="ch-link"><a href="https://posible.org.mx/" target="_blank" rel="noopener">Visitar POSiBLE →</a></div>
+</div>
+
+<div class="channel-card">
+<div class="ch-head"><span class="ch-name">Jóvenes Construyendo el Futuro</span><span class="ch-type">Programa federal de capacitación laboral</span></div>
+<div class="ch-desc">Programa del Gobierno de México que apoya la capacitación de jóvenes de 18 a 29 años en centros de trabajo reales, con apoyo económico mensual durante 12 meses --una vía de entrada a empresas y organizaciones del sector digital.</div>
+<div class="ch-link"><a href="https://jovenesconstruyendoelfuturo.stps.gob.mx/" target="_blank" rel="noopener">Visitar el programa →</a></div>
+</div>
+
+<div class="channel-group-title">Gobierno: cómo seguir la política pública digital directamente de la fuente</div>
+
+<div class="channel-card">
+<div class="ch-head"><span class="ch-name">Agencia de Transformación Digital y Telecomunicaciones (ATDT)</span><span class="ch-type">Dependencia federal</span></div>
+<div class="ch-desc">Sigue directamente los avances del Programa Sectorial 2025–2030, la política de identidad digital (Llave MX) y la agenda de conectividad nacional.</div>
+<div class="ch-link"><a href="https://www.gob.mx/atdt" target="_blank" rel="noopener">Visitar gob.mx/atdt →</a></div>
+</div>
+
+<div class="callout gold" style="margin-top:26px;">
+<h4>Cómo aprovechar esta lista para tu formación profesional</h4>
+No necesitas involucrarte con los diez canales a la vez. Elige uno o dos que conecten con tu interés específico --regulación y política pública, fintech y pagos, comercio electrónico, o formación técnica-- y síguelos de forma constante durante el semestre: suscríbete a su boletín, asiste a un evento abierto, o simplemente lee su próximo informe. La vinculación profesional real se construye con consistencia, no con una sola visita a un sitio web.
+</div>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- FUENTES -->
+<!-- ============================================================ -->
+<section id="fuentes">
+<h2><span class="num">§</span>Fuentes</h2>
+<ul style="font-size:13.5px; color:var(--ink-soft);">
+<li>Consejo Ejecutivo de la Economía Digital (CEDIG) / Centro-i para la Sociedad del Futuro. (2026). <i>T-MEC Digital: claves estratégicas para la competitividad, la innovación y la gobernanza regional.</i> <a href="https://centroi.org/wp-content/uploads/2026/05/T-MEC-Digital.-claves-estrategicas-para-la-competitividad-la-innovacion-y-la-gobernanza-regional.pdf" target="_blank" rel="noopener">Documento completo</a></li>
+<li>CEDIG. (2026). <i>Conclusiones de la tercera sesión 2026: Sistemas digitales de pago</i> (16 de junio de 2026).</li>
+<li>CEDIG. (2025). <i>Conclusiones de la tercera sesión 2025: Del calor del debate a la acción: ¿cómo construir una CURP digital segura?</i> (septiembre de 2025).</li>
+<li>Agencia de Transformación Digital y Telecomunicaciones (ATDT). (2025). <i>Programa Sectorial de la Agencia de Transformación Digital y Telecomunicaciones 2025–2030.</i> Diario Oficial de la Federación.</li>
+<li>Diario Oficial de la Federación. Reforma constitucional de simplificación orgánica (20 de diciembre de 2024) y decretos secundarios relativos a la extinción del IFT, Cofece e INAI (2025).</li>
+<li>Asociación FinTech México, en colaboración con Deloitte y Creel. (2025). <i>La evolución de los servicios financieros digitales en México 2025.</i></li>
+<li>Finnovista, Mastercard y Galileo. (2025). <i>Fintech Radar México 2025.</i></li>
+<li>Instituto Nacional de Estadística y Geografía (INEGI). Valor Agregado Bruto del Comercio Electrónico (VABCOEL), serie histórica.</li>
+</ul>
+<p class="src-note">Este documento sintetiza y cita fuentes públicas con fines exclusivamente educativos para el curso Economía Digital. Verifica siempre la fuente original antes de citarla en un trabajo académico o profesional.</p>
+</section>
+
+</main>
+
+<footer>
+Curso Economía Digital · ITESM Campus Santa Fe · Departamento de Economía<br>
+Recurso de vinculación profesional — material de referencia, no sustituye la lectura de las fuentes primarias enlazadas.
+</footer>
+
+</body>
+</html>
