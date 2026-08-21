@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autoevaluación · Sesión 4 — Economía Digital</title>
+<style>
+  :root{
+    --navy:#122a48;
+    --navy-soft:#1c3a5e;
+    --blue:#005ab5;
+    --blue-pale:#e9f1fb;
+    --gold:#c99735;
+    --gold-pale:#faf3e2;
+    --red:#b22234;
+    --red-pale:#fbeaea;
+    --green:#1f7a4d;
+    --green-pale:#e9f6ef;
+    --paper:#fbfaf6;
+    --ink:#22272e;
+    --ink-soft:#5a626c;
+    --rule:#d9dee5;
+    --serif: "Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+    --sans: "Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--paper),var(--paper)),
+      repeating-linear-gradient(0deg, rgba(18,42,72,0.028) 0px, rgba(18,42,72,0.028) 1px, transparent 1px, transparent 34px);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--blue);}
+
+  header.masthead{
+    background:linear-gradient(160deg,var(--navy) 0%,var(--navy-soft) 100%);
+    color:#eef2f7;
+    padding:38px 22px 30px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.masthead::after{
+    content:"";
+    position:absolute; right:-60px; top:-60px; width:260px; height:260px;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, rgba(201,151,53,0.25), transparent 70%);
+  }
+  .masthead-inner{max-width:920px; margin:0 auto; position:relative; z-index:1;}
+  .eyebrow{
+    font-family:var(--sans); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:#b9c7da; margin:0 0 10px;
+  }
+  h1.title{
+    font-family:var(--serif); font-weight:600; font-size:clamp(26px,4vw,40px);
+    margin:0 0 10px; letter-spacing:.2px;
+  }
+  .subtitle{
+    font-size:15px; color:#c7d3e2; max-width:640px; margin:0 0 20px;
+  }
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap:10px 22px; font-size:13px; color:#a9bad0;
+    border-top:1px solid rgba(255,255,255,0.14); padding-top:16px; margin-top:6px;
+  }
+  .meta-row b{color:#e7edf5; font-weight:600;}
+
+  main{max-width:920px; margin:0 auto; padding:30px 22px 90px;}
+
+  .instructions{
+    background:var(--gold-pale);
+    border:1px solid #ecd9a8;
+    border-left:4px solid var(--gold);
+    border-radius:3px;
+    padding:16px 20px;
+    font-size:14.5px;
+    color:#5b4a1e;
+    margin-bottom:34px;
+  }
+  .instructions b{color:#4a3b14;}
+
+  #progress-wrap{
+    position:sticky; top:0; z-index:20;
+    background:rgba(251,250,246,0.92); backdrop-filter:blur(4px);
+    border-bottom:1px solid var(--rule);
+    padding:10px 22px;
+    margin:0 0 30px;
+  }
+  #progress-inner{max-width:920px; margin:0 auto; display:flex; align-items:center; gap:14px;}
+  #progress-label{font-size:12.5px; color:var(--ink-soft); white-space:nowrap; font-variant-numeric:tabular-nums;}
+  #progress-track{flex:1; height:6px; background:#e3e7ec; border-radius:4px; overflow:hidden;}
+  #progress-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--blue),var(--gold)); transition:width .25s ease;}
+
+  .tema-divider{
+    display:flex; align-items:baseline; gap:14px;
+    margin:44px 0 18px;
+  }
+  .tema-divider:first-of-type{margin-top:0;}
+  .tema-num{
+    font-family:var(--serif); font-size:30px; color:var(--gold); font-weight:600; line-height:1;
+  }
+  .tema-heading h2{
+    font-family:var(--serif); font-size:19px; margin:0; color:var(--navy);
+  }
+  .tema-heading .tema-sub{font-size:12.5px; color:var(--ink-soft); margin-top:2px;}
+  .tema-divider .rule{flex:1; height:1px; background:var(--rule); align-self:center;}
+
+  .q-card{
+    background:#fff;
+    border:1px solid var(--rule);
+    border-radius:6px;
+    padding:20px 22px 18px;
+    margin-bottom:16px;
+    box-shadow:0 1px 2px rgba(18,42,72,0.03);
+    transition:box-shadow .2s ease, border-color .2s ease;
+  }
+  .q-card.answered{border-color:#c7d2de;}
+  .q-head{display:flex; gap:12px; margin-bottom:14px;}
+  .q-index{
+    font-family:var(--serif); font-weight:600; font-size:15px; color:#fff;
+    background:var(--navy); width:26px; height:26px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .q-text{font-size:15.5px; color:var(--ink); padding-top:2px;}
+
+  .options{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
+  .opt{
+    display:flex; align-items:flex-start; gap:11px;
+    border:1px solid #dfe4ea; border-radius:5px;
+    padding:10px 13px;
+    cursor:pointer;
+    font-size:14.5px;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .opt:hover{background:var(--blue-pale); border-color:#b9d2ef;}
+  .opt input{margin-top:3px; accent-color:var(--blue); flex-shrink:0;}
+  .opt .opt-letter{font-weight:700; color:var(--navy); width:16px; flex-shrink:0;}
+  .opt.selected{background:var(--blue-pale); border-color:var(--blue);}
+
+  .opt.correct-answer{background:var(--green-pale); border-color:var(--green);}
+  .opt.correct-answer .opt-letter{color:var(--green);}
+  .opt.wrong-answer{background:var(--red-pale); border-color:var(--red);}
+  .opt.wrong-answer .opt-letter{color:var(--red);}
+  .opt.disabled{cursor:default;}
+  .opt.disabled:hover{background:inherit;}
+  .opt.correct-answer:hover{background:var(--green-pale);}
+  .opt.wrong-answer:hover{background:var(--red-pale);}
+
+  .tag{
+    display:inline-block; font-size:11px; font-weight:700; letter-spacing:.03em;
+    padding:2px 9px; border-radius:20px; margin-left:auto; white-space:nowrap; margin-top:1px;
+  }
+  .tag.ok{background:var(--green-pale); color:var(--green);}
+  .tag.bad{background:var(--red-pale); color:var(--red);}
+
+  .explain{
+    margin-top:14px; padding:12px 15px; font-size:13.8px; color:#3d454e;
+    background:#f4f6f8; border-left:3px solid var(--blue); border-radius:0 4px 4px 0;
+    display:none;
+  }
+  .explain b{color:var(--navy);}
+  .q-card.revealed .explain{display:block;}
+
+  #submit-zone{text-align:center; margin:38px 0 10px;}
+  button{
+    font-family:var(--sans); font-weight:600; font-size:15px; cursor:pointer;
+    border:none; border-radius:5px; padding:13px 34px;
+  }
+  #btn-submit{background:var(--navy); color:#fff;}
+  #btn-submit:hover{background:var(--navy-soft);}
+  #btn-submit:disabled{background:#a9b4c1; cursor:not-allowed;}
+  #hint-remaining{font-size:12.5px; color:var(--ink-soft); margin-top:9px;}
+
+  #results{display:none; margin:8px 0 46px;}
+  .report{
+    background:linear-gradient(160deg,var(--navy) 0%,var(--navy-soft) 100%);
+    color:#eef2f7; border-radius:8px; padding:30px 26px; margin-bottom:26px;
+    display:flex; gap:30px; flex-wrap:wrap; align-items:center;
+  }
+  .score-ring{
+    width:118px; height:118px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; position:relative;
+    background:conic-gradient(var(--gold) calc(var(--pct,0)*1%), rgba(255,255,255,0.14) 0);
+  }
+  .score-ring::before{
+    content:""; position:absolute; inset:9px; border-radius:50%; background:var(--navy);
+  }
+  .score-ring span{position:relative; z-index:1; font-family:var(--serif); font-size:26px; font-weight:700;}
+  .report-text{flex:1; min-width:220px;}
+  .report-text h3{font-family:var(--serif); margin:0 0 6px; font-size:19px;}
+  .report-text p{margin:0; font-size:14px; color:#cbd6e4;}
+
+  .tema-bars{display:flex; flex-direction:column; gap:14px; margin-bottom:26px;}
+  .tema-bar-row{display:grid; grid-template-columns:190px 1fr 46px; align-items:center; gap:12px;}
+  .tema-bar-label{font-size:13px; color:var(--navy); font-weight:600;}
+  .tema-bar-track{height:10px; background:#e6e9ee; border-radius:5px; overflow:hidden;}
+  .tema-bar-fill{height:100%; border-radius:5px;}
+  .tema-bar-pct{font-size:12.5px; color:var(--ink-soft); text-align:right; font-variant-numeric:tabular-nums;}
+
+  #diagnosis{
+    background:#fff; border:1px solid var(--rule); border-left:4px solid var(--gold);
+    border-radius:4px; padding:18px 22px; font-size:14.5px; color:#3d454e; margin-bottom:10px;
+  }
+  #diagnosis h4{margin:0 0 8px; font-family:var(--serif); color:var(--navy); font-size:16px;}
+  #diagnosis ul{margin:8px 0 0; padding-left:20px;}
+  #diagnosis li{margin-bottom:4px;}
+
+  #btn-review, #btn-reset{
+    margin-top:18px; margin-right:10px;
+    background:transparent; color:var(--navy); border:1.5px solid var(--navy);
+  }
+  #btn-review:hover, #btn-reset:hover{background:var(--navy); color:#fff;}
+
+  footer{
+    text-align:center; font-size:12px; color:var(--ink-soft); padding:20px 22px 40px;
+  }
+
+  @media (max-width:560px){
+    .tema-bar-row{grid-template-columns:120px 1fr 40px;}
+    .report{flex-direction:column; text-align:center;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <p class="eyebrow">ITESM Campus Santa Fe · Departamento de Economía</p>
+    <h1 class="title">Autoevaluación — Sesión 4</h1>
+    <p class="subtitle">Diez reactivos sobre el Tema 3, parte II (3.3–3.4): el marco predicción–juicio, los efectos de sistema de la IA, la estructura de mercado de la predicción, y la política pública digital. Al enviar sus respuestas, cada reactivo mostrará la solución y una discusión breve.</p>
+    <div class="meta-row">
+      <span><b>10</b> reactivos</span>
+      <span><b>~10–12 min</b> de duración estimada</span>
+      <span><b>Sin límite de tiempo</b> · autoevaluación no calificada</span>
+    </div>
+  </div>
+</header>
+
+<div id="progress-wrap">
+  <div id="progress-inner">
+    <span id="progress-label">0 / 10 respondidas</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+</div>
+
+<main>
+
+  <div class="instructions">
+    <b>Instrucciones.</b> Seleccione la opción correcta para cada reactivo. Puede responder en cualquier orden. Al enviar, cada pregunta mostrará si acertó, la solución completa (incluyendo los cálculos, cuando aplique) y una discusión que remite al bloque correspondiente de la Sesión 4. No se registra ni se califica: es una herramienta de repaso personal antes del proyecto integrador y el examen final.
+  </div>
+
+  <div id="quiz-body"></div>
+
+  <div id="submit-zone">
+    <button id="btn-submit" disabled>Enviar respuestas</button>
+    <p id="hint-remaining">Responda los 10 reactivos para habilitar el envío.</p>
+  </div>
+
+  <section id="results">
+    <div class="report">
+      <div class="score-ring" id="score-ring" style="--pct:0"><span id="score-ring-text">0%</span></div>
+      <div class="report-text">
+        <h3 id="report-headline">Resultado</h3>
+        <p id="report-sub">—</p>
+      </div>
+    </div>
+
+    <div class="tema-bars" id="tema-bars"></div>
+
+    <div id="diagnosis"></div>
+
+    <div>
+      <button id="btn-review">Revisar mis respuestas</button>
+      <button id="btn-reset">Reiniciar autoevaluación</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>Curso Economía Digital · ITESM Campus Santa Fe · Sesión 4 (Tema 3, parte II) · Material de autoestudio, no sustituye la evaluación formal del curso.</footer>
+
+<script>
+/* tema: "1.1" | "1.2" | "1.3" | "1.4" */
+const QUESTIONS = [
+  {
+    tema:"3.3a",
+    text:"En el marco de Gans (2025), que extiende a Agrawal, Gans y Goldfarb (2018), el “Juicio” (J) dentro de una decisión se define como:",
+    options:[
+      "El llenado de información faltante sobre lo que probablemente ocurrirá",
+      "La asignación de valor relativo a los posibles resultados, dado lo que probablemente ocurrirá",
+      "La automatización completa de una tarea repetitiva",
+      "El costo total de entrenar un modelo de inteligencia artificial"
+    ],
+    correct:1,
+    explain:"Decisión = g(Predicción, Juicio) → Acción. La Predicción llena información faltante (“¿qué es probable que ocurra?”); el Juicio asigna valor relativo a los resultados posibles (“¿qué acción prefiero?”) (Bloque 3)."
+  },
+  {
+    tema:"3.3a",
+    text:"En el problema min_{P,J} c_P·P + c_J·J sujeto a Q(P,J)=Q̄, la condición de tangencia del óptimo interior es:",
+    options:[
+      "(∂Q/∂P)/(∂Q/∂J) = c_P/c_J",
+      "P = J, sin importar los precios relativos",
+      "c_P = c_J siempre en equilibrio",
+      "Q(P,J) = c_P + c_J"
+    ],
+    correct:0,
+    explain:"La tasa marginal de sustitución técnica entre predicción y juicio debe igualar el cociente de sus precios: (∂Q/∂P)/(∂Q/∂J) = c_P/c_J (Bloque 3)."
+  },
+  {
+    tema:"3.3a",
+    text:"Cuando la IA reduce c_P, el modelo predice dos efectos simultáneos. ¿Cuáles?",
+    options:[
+      "Efecto sustitución (más predicción, menos juicio, a lo largo de la isocuanta) y efecto escala (más decisiones se vuelven rentables de automatizar)",
+      "Solo un efecto ingreso, sin ningún cambio en la mezcla de insumos",
+      "El juicio humano se vuelve completamente irrelevante en todos los casos",
+      "Ningún efecto, porque P y J son complementos perfectos por definición"
+    ],
+    correct:0,
+    explain:"Como ilustra la Figura 4 (desplazamiento de E₀ a E₁): efecto sustitución a lo largo de la isocuanta, y efecto escala vía un mayor volumen total de decisiones producidas (Bloque 3)."
+  },
+  {
+    tema:"3.3b",
+    text:"El “efecto bullwhip” de la IA, en el marco de Gans (2025), describe cómo:",
+    options:[
+      "Un sesgo sistemático en un modelo ampliamente adoptado se amplifica a través de decisiones interdependientes, en lugar de promediarse como con juicios heterogéneos descentralizados",
+      "Los precios de los modelos de IA siempre caen a cero en el largo plazo",
+      "La IA elimina por completo cualquier posibilidad de sesgo algorítmico",
+      "Los efectos de la IA se limitan exclusivamente a la firma que la desarrolla"
+    ],
+    correct:0,
+    explain:"Al igual que en cadenas de suministro un pequeño error de previsión se amplifica aguas arriba, un sesgo en un modelo de predicción muy adoptado se propaga por decisiones interdependientes (Bloque 4; conecta con la Lectura complementaria [5])."
+  },
+  {
+    tema:"3.3b",
+    text:"El problema de “alineación” (alignment) se describe, en el marco de Gans, como un problema de:",
+    options:[
+      "Optimización de hiperparámetros exclusivamente técnico",
+      "Agencia: riesgo moral con acción oculta entre quien entrena el sistema (agente) y quien confía en sus recomendaciones (principal)",
+      "Costos de transacción entre mercado y firma (Coase)",
+      "Selección adversa tipo Akerlof"
+    ],
+    correct:1,
+    explain:"La relación entre quien diseña/entrena el sistema de predicción y quien debe confiar en sus recomendaciones reproduce un problema clásico de riesgo moral con acción oculta; auditorías y explicabilidad son la contraparte moderna de los contratos de incentivos (Bloque 4)."
+  },
+  {
+    tema:"3.3b",
+    text:"El caso de radiología asistida por IA (Agarwal, Moehring, Rajpurkar y Salz, 2023) concluye que:",
+    options:[
+      "Combinar predicción algorítmica con juicio clínico siempre supera a la mejor de las dos fuentes por separado",
+      "El desempeño conjunto depende críticamente de si el médico puede discriminar cuándo confiar más en el algoritmo",
+      "El juicio humano nunca agrega valor una vez que existe un algoritmo de predicción",
+      "La predicción algorítmica es irrelevante en el diagnóstico por imagen"
+    ],
+    correct:1,
+    explain:"La complementariedad predicción–juicio no es automática: requiere que el humano reciba señales claras de cuándo su juicio agrega valor y cuándo debe deferir a la predicción (Bloque 4)."
+  },
+  {
+    tema:"3.3c",
+    text:"La estructura de costos de un modelo de IA (F_IA alto, c_IA → 0) es, en términos formales:",
+    options:[
+      "Completamente distinta a la de cualquier bien digital estudiado en el curso",
+      "Formalmente idéntica a la estructura de costos de bienes digitales derivada en la Sesión 1, lo que reproduce la tendencia a la concentración de mercado",
+      "Irrelevante para entender la estructura del mercado de proveedores de IA",
+      "Caracterizada por costos fijos bajos y costos marginales altos"
+    ],
+    correct:1,
+    explain:"F_IA alto (costo fijo de cómputo/datos de entrenamiento) y c_IA → 0 (costo marginal de inferencia) reproducen, en el mercado de modelos de IA, la misma estructura de la Figura 1 (Sesión 1) y su tendencia a la concentración (Bloque 5)."
+  },
+  {
+    tema:"3.4",
+    text:"La Digital Markets Act de la Unión Europea representa, principalmente, un enfoque de:",
+    options:[
+      "Defensa de la competencia puramente ex post, caso por caso",
+      "Regulación ex ante: obligaciones estructurales y de comportamiento para plataformas designadas como “guardianes de acceso” según umbrales cuantitativos, sin necesidad de probar abuso caso por caso",
+      "Prohibición total de operar para cualquier plataforma digital grande",
+      "Un código de conducta voluntario sin ninguna fuerza legal"
+    ],
+    correct:1,
+    explain:"A diferencia de la defensa de la competencia tradicional, la DMA impone obligaciones ex ante a plataformas designadas como gatekeepers según umbrales cuantitativos de facturación, capitalización y usuarios (Bloque 6)."
+  },
+  {
+    tema:"3.4",
+    text:"La portabilidad e interoperabilidad de datos, promovida por la OCDE, opera principalmente reduciendo:",
+    options:[
+      "El precio de venta al consumidor final, directamente",
+      "El costo de cambio de proveedor (SC en la fórmula de lock-in de la Sesión 2), sin necesidad de fragmentar la propiedad del activo",
+      "El costo fijo F* de producir el bien digital",
+      "La elasticidad-precio de la demanda de cualquier mercado"
+    ],
+    correct:1,
+    explain:"La portabilidad de datos ataca directamente el término SC de V_lock-in = SC + Δ (Sesión 2), restaurando la disputabilidad del mercado sin fragmentar la propiedad del activo (Bloque 6)."
+  },
+  {
+    tema:"3.4",
+    text:"En el ejercicio integrador (Armstrong + IA), si la mejora algorítmica profundiza el tipping de mercado, el instrumento regulatorio más adecuado tiende a ser la regulación ex ante, principalmente porque:",
+    options:[
+      "El mecanismo excluyente proviene de una ventaja de costos legítima en datos, difícil de calificar como “abuso” bajo el estándar ex post caso por caso",
+      "La regulación ex post siempre es más rápida de aplicar que la ex ante",
+      "No existe ninguna diferencia práctica entre ambos enfoques regulatorios",
+      "La ley europea prohíbe expresamente cualquier uso de inteligencia artificial en plataformas"
+    ],
+    correct:0,
+    explain:"Como en el ejercicio guiado de la Sesión 3, cuando la exclusión de competidores proviene de una ventaja de costos legítima —no de una conducta anticompetitiva aislada—, la regulación estructural ex ante (complementada con portabilidad de datos) resulta más adecuada que exigir probar abuso caso por caso (Bloque 7)."
+  }
+];
+
+const TEMA_META = {
+  "3.3a":{label:"3.3a · Marco predicción–juicio", color:"#005ab5"},
+  "3.3b":{label:"3.3b · Efectos de sistema", color:"#c99735"},
+  "3.3c":{label:"3.3c · Mercado de la predicción", color:"#1f7a4d"},
+  "3.4":{label:"3.4 · Política pública", color:"#8a4baf"}
+};
+const TEMA_ORDER = ["3.3a","3.3b","3.3c","3.4"];
+const LETTERS = ["A","B","C","D"];
+
+const quizBody = document.getElementById("quiz-body");
+let lastTema = null;
+let answered = {};
+
+QUESTIONS.forEach((q, qi) => {
+  if(q.tema !== lastTema){
+    lastTema = q.tema;
+    const meta = TEMA_META[q.tema];
+    const divider = document.createElement("div");
+    divider.className = "tema-divider";
+    divider.innerHTML = `
+      <div class="tema-num" style="color:${meta.color}">${TEMA_ORDER.indexOf(q.tema)+1}</div>
+      <div class="tema-heading">
+        <h2>${meta.label}</h2>
+        <div class="tema-sub">Sesión 4 del curso</div>
+      </div>
+      <div class="rule"></div>`;
+    quizBody.appendChild(divider);
+  }
+
+  const card = document.createElement("div");
+  card.className = "q-card";
+  card.id = "q-" + qi;
+
+  const optsHtml = q.options.map((opt, oi) => `
+    <li class="opt" data-qi="${qi}" data-oi="${oi}">
+      <input type="radio" name="q${qi}" id="q${qi}o${oi}" value="${oi}">
+      <span class="opt-letter">${LETTERS[oi]}</span>
+      <label for="q${qi}o${oi}" style="cursor:pointer; flex:1;">${opt}</label>
+    </li>`).join("");
+
+  card.innerHTML = `
+    <div class="q-head">
+      <div class="q-index">${qi+1}</div>
+      <div class="q-text">${q.text}</div>
+    </div>
+    <ul class="options">${optsHtml}</ul>
+    <div class="explain"><b>Solución y discusión.</b> ${q.explain}</div>
+  `;
+  quizBody.appendChild(card);
+});
+
+quizBody.addEventListener("click", (e) => {
+  const row = e.target.closest(".opt");
+  if(!row || row.classList.contains("disabled")) return;
+  const qi = +row.dataset.qi, oi = +row.dataset.oi;
+  const radio = document.getElementById(`q${qi}o${oi}`);
+  radio.checked = true;
+  answered[qi] = oi;
+
+  const card = document.getElementById("q-"+qi);
+  card.classList.add("answered");
+  card.querySelectorAll(".opt").forEach(o => o.classList.remove("selected"));
+  row.classList.add("selected");
+
+  updateProgress();
+});
+
+function updateProgress(){
+  const n = Object.keys(answered).length;
+  const total = QUESTIONS.length;
+  document.getElementById("progress-label").textContent = `${n} / ${total} respondidas`;
+  document.getElementById("progress-fill").style.width = (n/total*100) + "%";
+  const btn = document.getElementById("btn-submit");
+  const hint = document.getElementById("hint-remaining");
+  if(n === total){
+    btn.disabled = false;
+    hint.textContent = "Todas las preguntas respondidas — puede enviar cuando guste.";
+  } else {
+    btn.disabled = true;
+    hint.textContent = `Responda los ${total} reactivos para habilitar el envío (faltan ${total-n}).`;
+  }
+}
+
+document.getElementById("btn-submit").addEventListener("click", () => {
+  let correctCount = 0;
+  const temaStats = {};
+  TEMA_ORDER.forEach(t => temaStats[t] = {correct:0, total:0});
+
+  QUESTIONS.forEach((q, qi) => {
+    const card = document.getElementById("q-"+qi);
+    const sel = answered[qi];
+    const isCorrect = sel === q.correct;
+    if(isCorrect) correctCount++;
+    temaStats[q.tema].total++;
+    if(isCorrect) temaStats[q.tema].correct++;
+
+    card.classList.add("revealed");
+    card.querySelectorAll(".opt").forEach(o => {
+      o.classList.add("disabled");
+      const oi = +o.dataset.oi;
+      if(oi === q.correct) o.classList.add("correct-answer");
+      else if(oi === sel) o.classList.add("wrong-answer");
+    });
+
+    const head = card.querySelector(".q-head");
+    let tag = document.createElement("span");
+    tag.className = "tag " + (isCorrect ? "ok" : "bad");
+    tag.textContent = isCorrect ? "Correcto" : "Incorrecto";
+    head.appendChild(tag);
+  });
+
+  const pct = Math.round(correctCount / QUESTIONS.length * 100);
+
+  document.getElementById("score-ring").style.setProperty("--pct", pct);
+  document.getElementById("score-ring-text").textContent = pct + "%";
+
+  let headline;
+  if(pct >= 90){ headline = "Dominio sólido del Tema 3 (parte II) — y del curso"; }
+  else if(pct >= 70){ headline = "Buen dominio, con puntos específicos de repaso"; }
+  else if(pct >= 50){ headline = "Base parcial — conviene repasar antes del cierre del curso"; }
+  else { headline = "Se recomienda repasar el Tema 3 (parte II) antes del cierre del curso"; }
+  document.getElementById("report-headline").textContent = headline;
+  document.getElementById("report-sub").textContent = `${correctCount} de ${QUESTIONS.length} reactivos correctos.`;
+
+  const barsWrap = document.getElementById("tema-bars");
+  barsWrap.innerHTML = "";
+  let weakest = null;
+  TEMA_ORDER.forEach(t => {
+    const s = temaStats[t];
+    if(s.total === 0) return;
+    const tp = Math.round(s.correct/s.total*100);
+    if(weakest === null || tp < weakest.pct) weakest = {tema:t, pct:tp};
+    const meta = TEMA_META[t];
+    const row = document.createElement("div");
+    row.className = "tema-bar-row";
+    row.innerHTML = `
+      <div class="tema-bar-label">${meta.label}</div>
+      <div class="tema-bar-track"><div class="tema-bar-fill" style="width:${tp}%; background:${meta.color}"></div></div>
+      <div class="tema-bar-pct">${s.correct}/${s.total}</div>`;
+    barsWrap.appendChild(row);
+  });
+
+  const diag = document.getElementById("diagnosis");
+  const blockMap = {
+    "3.3a":"Bloque 3 de la Sesión 4: el marco predicción–juicio y la condición de tangencia del problema de minimización de costos.",
+    "3.3b":"Bloque 4 de la Sesión 4: los tres efectos de sistema (bullwhip, alineación, complementos/sustitutos) y el caso de radiología.",
+    "3.3c":"Bloque 5 de la Sesión 4: la estructura de costos del mercado de modelos de IA (F_IA alto, c_IA → 0).",
+    "3.4":"Bloque 6 de la Sesión 4: las tres corrientes de regulación digital (ex ante, ex post, portabilidad de datos) y la síntesis normativa."
+  };
+  let diagHtml = `<h4>Diagnóstico por subtema</h4>`;
+  if(weakest && weakest.pct < 70){
+    diagHtml += `<p>Su área con mayor margen de mejora es <b>${TEMA_META[weakest.tema].label}</b> (${weakest.pct}% de aciertos). Se sugiere repasar:</p><ul><li>${blockMap[weakest.tema]}</li></ul>`;
+  } else {
+    diagHtml += `<p>Su desempeño es parejo entre los cuatro subtemas de la Sesión 4 — buena base para el proyecto integrador y el examen final del curso.</p>`;
+  }
+  diag.innerHTML = diagHtml;
+
+  document.getElementById("results").style.display = "block";
+  document.getElementById("submit-zone").style.display = "none";
+  document.getElementById("results").scrollIntoView({behavior:"smooth", block:"start"});
+});
+
+document.getElementById("btn-review").addEventListener("click", () => {
+  document.getElementById("quiz-body").scrollIntoView({behavior:"smooth", block:"start"});
+});
+
+document.getElementById("btn-reset").addEventListener("click", () => {
+  window.location.reload();
+});
+
+updateProgress();
+</script>
+</body>
+</html>
