@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autoevaluación · Sesión 1 — Economía Digital</title>
+<style>
+  :root{
+    --navy:#122a48;
+    --navy-soft:#1c3a5e;
+    --blue:#005ab5;
+    --blue-pale:#e9f1fb;
+    --gold:#c99735;
+    --gold-pale:#faf3e2;
+    --red:#b22234;
+    --red-pale:#fbeaea;
+    --green:#1f7a4d;
+    --green-pale:#e9f6ef;
+    --paper:#fbfaf6;
+    --ink:#22272e;
+    --ink-soft:#5a626c;
+    --rule:#d9dee5;
+    --serif: "Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+    --sans: "Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--paper),var(--paper)),
+      repeating-linear-gradient(0deg, rgba(18,42,72,0.028) 0px, rgba(18,42,72,0.028) 1px, transparent 1px, transparent 34px);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--blue);}
+
+  header.masthead{
+    background:linear-gradient(160deg,var(--navy) 0%,var(--navy-soft) 100%);
+    color:#eef2f7;
+    padding:38px 22px 30px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.masthead::after{
+    content:"";
+    position:absolute; right:-60px; top:-60px; width:260px; height:260px;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, rgba(201,151,53,0.25), transparent 70%);
+  }
+  .masthead-inner{max-width:920px; margin:0 auto; position:relative; z-index:1;}
+  .eyebrow{
+    font-family:var(--sans); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:#b9c7da; margin:0 0 10px;
+  }
+  h1.title{
+    font-family:var(--serif); font-weight:600; font-size:clamp(26px,4vw,40px);
+    margin:0 0 10px; letter-spacing:.2px;
+  }
+  .subtitle{
+    font-size:15px; color:#c7d3e2; max-width:640px; margin:0 0 20px;
+  }
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap:10px 22px; font-size:13px; color:#a9bad0;
+    border-top:1px solid rgba(255,255,255,0.14); padding-top:16px; margin-top:6px;
+  }
+  .meta-row b{color:#e7edf5; font-weight:600;}
+
+  main{max-width:920px; margin:0 auto; padding:30px 22px 90px;}
+
+  .instructions{
+    background:var(--gold-pale);
+    border:1px solid #ecd9a8;
+    border-left:4px solid var(--gold);
+    border-radius:3px;
+    padding:16px 20px;
+    font-size:14.5px;
+    color:#5b4a1e;
+    margin-bottom:34px;
+  }
+  .instructions b{color:#4a3b14;}
+
+  #progress-wrap{
+    position:sticky; top:0; z-index:20;
+    background:rgba(251,250,246,0.92); backdrop-filter:blur(4px);
+    border-bottom:1px solid var(--rule);
+    padding:10px 22px;
+    margin:0 0 30px;
+  }
+  #progress-inner{max-width:920px; margin:0 auto; display:flex; align-items:center; gap:14px;}
+  #progress-label{font-size:12.5px; color:var(--ink-soft); white-space:nowrap; font-variant-numeric:tabular-nums;}
+  #progress-track{flex:1; height:6px; background:#e3e7ec; border-radius:4px; overflow:hidden;}
+  #progress-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--blue),var(--gold)); transition:width .25s ease;}
+
+  .tema-divider{
+    display:flex; align-items:baseline; gap:14px;
+    margin:44px 0 18px;
+  }
+  .tema-divider:first-of-type{margin-top:0;}
+  .tema-num{
+    font-family:var(--serif); font-size:30px; color:var(--gold); font-weight:600; line-height:1;
+  }
+  .tema-heading h2{
+    font-family:var(--serif); font-size:19px; margin:0; color:var(--navy);
+  }
+  .tema-heading .tema-sub{font-size:12.5px; color:var(--ink-soft); margin-top:2px;}
+  .tema-divider .rule{flex:1; height:1px; background:var(--rule); align-self:center;}
+
+  .q-card{
+    background:#fff;
+    border:1px solid var(--rule);
+    border-radius:6px;
+    padding:20px 22px 18px;
+    margin-bottom:16px;
+    box-shadow:0 1px 2px rgba(18,42,72,0.03);
+    transition:box-shadow .2s ease, border-color .2s ease;
+  }
+  .q-card.answered{border-color:#c7d2de;}
+  .q-head{display:flex; gap:12px; margin-bottom:14px;}
+  .q-index{
+    font-family:var(--serif); font-weight:600; font-size:15px; color:#fff;
+    background:var(--navy); width:26px; height:26px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .q-text{font-size:15.5px; color:var(--ink); padding-top:2px;}
+
+  .options{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
+  .opt{
+    display:flex; align-items:flex-start; gap:11px;
+    border:1px solid #dfe4ea; border-radius:5px;
+    padding:10px 13px;
+    cursor:pointer;
+    font-size:14.5px;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .opt:hover{background:var(--blue-pale); border-color:#b9d2ef;}
+  .opt input{margin-top:3px; accent-color:var(--blue); flex-shrink:0;}
+  .opt .opt-letter{font-weight:700; color:var(--navy); width:16px; flex-shrink:0;}
+  .opt.selected{background:var(--blue-pale); border-color:var(--blue);}
+
+  .opt.correct-answer{background:var(--green-pale); border-color:var(--green);}
+  .opt.correct-answer .opt-letter{color:var(--green);}
+  .opt.wrong-answer{background:var(--red-pale); border-color:var(--red);}
+  .opt.wrong-answer .opt-letter{color:var(--red);}
+  .opt.disabled{cursor:default;}
+  .opt.disabled:hover{background:inherit;}
+  .opt.correct-answer:hover{background:var(--green-pale);}
+  .opt.wrong-answer:hover{background:var(--red-pale);}
+
+  .tag{
+    display:inline-block; font-size:11px; font-weight:700; letter-spacing:.03em;
+    padding:2px 9px; border-radius:20px; margin-left:auto; white-space:nowrap; margin-top:1px;
+  }
+  .tag.ok{background:var(--green-pale); color:var(--green);}
+  .tag.bad{background:var(--red-pale); color:var(--red);}
+
+  .explain{
+    margin-top:14px; padding:12px 15px; font-size:13.8px; color:#3d454e;
+    background:#f4f6f8; border-left:3px solid var(--blue); border-radius:0 4px 4px 0;
+    display:none;
+  }
+  .explain b{color:var(--navy);}
+  .q-card.revealed .explain{display:block;}
+
+  #submit-zone{text-align:center; margin:38px 0 10px;}
+  button{
+    font-family:var(--sans); font-weight:600; font-size:15px; cursor:pointer;
+    border:none; border-radius:5px; padding:13px 34px;
+  }
+  #btn-submit{background:var(--navy); color:#fff;}
+  #btn-submit:hover{background:var(--navy-soft);}
+  #btn-submit:disabled{background:#a9b4c1; cursor:not-allowed;}
+  #hint-remaining{font-size:12.5px; color:var(--ink-soft); margin-top:9px;}
+
+  #results{display:none; margin:8px 0 46px;}
+  .report{
+    background:linear-gradient(160deg,var(--navy) 0%,var(--navy-soft) 100%);
+    color:#eef2f7; border-radius:8px; padding:30px 26px; margin-bottom:26px;
+    display:flex; gap:30px; flex-wrap:wrap; align-items:center;
+  }
+  .score-ring{
+    width:118px; height:118px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; position:relative;
+    background:conic-gradient(var(--gold) calc(var(--pct,0)*1%), rgba(255,255,255,0.14) 0);
+  }
+  .score-ring::before{
+    content:""; position:absolute; inset:9px; border-radius:50%; background:var(--navy);
+  }
+  .score-ring span{position:relative; z-index:1; font-family:var(--serif); font-size:26px; font-weight:700;}
+  .report-text{flex:1; min-width:220px;}
+  .report-text h3{font-family:var(--serif); margin:0 0 6px; font-size:19px;}
+  .report-text p{margin:0; font-size:14px; color:#cbd6e4;}
+
+  .tema-bars{display:flex; flex-direction:column; gap:14px; margin-bottom:26px;}
+  .tema-bar-row{display:grid; grid-template-columns:190px 1fr 46px; align-items:center; gap:12px;}
+  .tema-bar-label{font-size:13px; color:var(--navy); font-weight:600;}
+  .tema-bar-track{height:10px; background:#e6e9ee; border-radius:5px; overflow:hidden;}
+  .tema-bar-fill{height:100%; border-radius:5px;}
+  .tema-bar-pct{font-size:12.5px; color:var(--ink-soft); text-align:right; font-variant-numeric:tabular-nums;}
+
+  #diagnosis{
+    background:#fff; border:1px solid var(--rule); border-left:4px solid var(--gold);
+    border-radius:4px; padding:18px 22px; font-size:14.5px; color:#3d454e; margin-bottom:10px;
+  }
+  #diagnosis h4{margin:0 0 8px; font-family:var(--serif); color:var(--navy); font-size:16px;}
+  #diagnosis ul{margin:8px 0 0; padding-left:20px;}
+  #diagnosis li{margin-bottom:4px;}
+
+  #btn-review, #btn-reset{
+    margin-top:18px; margin-right:10px;
+    background:transparent; color:var(--navy); border:1.5px solid var(--navy);
+  }
+  #btn-review:hover, #btn-reset:hover{background:var(--navy); color:#fff;}
+
+  footer{
+    text-align:center; font-size:12px; color:var(--ink-soft); padding:20px 22px 40px;
+  }
+
+  @media (max-width:560px){
+    .tema-bar-row{grid-template-columns:120px 1fr 40px;}
+    .report{flex-direction:column; text-align:center;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <p class="eyebrow">ITESM Campus Santa Fe · Departamento de Economía</p>
+    <h1 class="title">Autoevaluación — Sesión 1</h1>
+    <p class="subtitle">Diez reactivos sobre el Tema 1 (1.1–1.4): digitalización de la economía, bienes tradicionales y digitales, internet de las cosas, y costos de transacción. Al enviar sus respuestas, cada reactivo mostrará la solución y una discusión breve.</p>
+    <div class="meta-row">
+      <span><b>10</b> reactivos</span>
+      <span><b>~10–12 min</b> de duración estimada</span>
+      <span><b>Sin límite de tiempo</b> · autoevaluación no calificada</span>
+    </div>
+  </div>
+</header>
+
+<div id="progress-wrap">
+  <div id="progress-inner">
+    <span id="progress-label">0 / 10 respondidas</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+</div>
+
+<main>
+
+  <div class="instructions">
+    <b>Instrucciones.</b> Seleccione la opción correcta para cada reactivo. Puede responder en cualquier orden. Al enviar, cada pregunta mostrará si acertó, la solución completa (incluyendo el ejercicio numérico) y una discusión que remite al bloque correspondiente de la Sesión 1. No se registra ni se califica: es una herramienta de repaso personal antes de la Sesión 2.
+  </div>
+
+  <div id="quiz-body"></div>
+
+  <div id="submit-zone">
+    <button id="btn-submit" disabled>Enviar respuestas</button>
+    <p id="hint-remaining">Responda los 10 reactivos para habilitar el envío.</p>
+  </div>
+
+  <section id="results">
+    <div class="report">
+      <div class="score-ring" id="score-ring" style="--pct:0"><span id="score-ring-text">0%</span></div>
+      <div class="report-text">
+        <h3 id="report-headline">Resultado</h3>
+        <p id="report-sub">—</p>
+      </div>
+    </div>
+
+    <div class="tema-bars" id="tema-bars"></div>
+
+    <div id="diagnosis"></div>
+
+    <div>
+      <button id="btn-review">Revisar mis respuestas</button>
+      <button id="btn-reset">Reiniciar autoevaluación</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>Curso Economía Digital · ITESM Campus Santa Fe · Sesión 1 (Tema 1) · Material de autoestudio, no sustituye la evaluación formal del curso.</footer>
+
+<script>
+/* tema: "1.1" | "1.2" | "1.3" | "1.4" */
+const QUESTIONS = [
+  {
+    tema:"1.1",
+    text:"¿Cuál describe mejor la estructura de costos de un bien digital frente a la de un bien tradicional?",
+    options:[
+      "Costo fijo bajo y costo marginal alto, igual que en un bien tradicional",
+      "Costo fijo bajo y costo marginal cercano a cero",
+      "Costo fijo alto (la “primera copia”) y costo marginal de reproducción cercano a cero",
+      "Costo fijo y costo marginal ambos cercanos a cero"
+    ],
+    correct:2,
+    explain:"C_dig(Q) = F* + c*Q, con <b>F* ≫ F</b> (costo hundido de la primera copia: grabar un álbum, entrenar un modelo) y <b>c* → 0⁺</b> (costo de servir una copia adicional). Es el punto de partida formal del Bloque 3 (1.1)."
+  },
+  {
+    tema:"1.1",
+    text:"Si AC_dig(Q) = F*/Q + c*, la derivada ∂AC_dig/∂Q = −F*/Q² < 0 implica que:",
+    options:[
+      "El costo medio es estrictamente creciente conforme aumenta Q",
+      "El costo medio es estrictamente decreciente — la base microeconómica de la tendencia “winner-take-most”",
+      "El costo marginal se vuelve negativo para Q grande",
+      "F* deja de tener efecto alguno sobre el costo medio"
+    ],
+    correct:1,
+    explain:"Una derivada negativa significa que AC(Q) decrece con Q: economías de escala sin agotamiento técnico evidente. Es la propiedad que, formalizada en el Bloque 3, se retomará en la Sesión 2 para explicar la concentración de mercados digitales."
+  },
+  {
+    tema:"1.2",
+    text:"¿Cuál de las siguientes NO es una de las cuatro propiedades económicas de un bien de información según Shapiro y Varian?",
+    options:[
+      "No rivalidad",
+      "Bien de experiencia",
+      "Estructura de costos asimétrica (F* alto, c* → 0)",
+      "Rivalidad perfecta en el consumo"
+    ],
+    correct:3,
+    explain:"Las cuatro propiedades vistas en el Bloque 4 (1.2) son: no rivalidad, bien de experiencia, estructura de costos asimétrica, y potencial de externalidades de red. La “rivalidad perfecta” es, de hecho, lo opuesto a la primera propiedad."
+  },
+  {
+    tema:"1.2",
+    text:"Según la reseña de Guido Stein citada en clase, un bien de información es un “bien de experiencia” porque, a diferencia de un zapato:",
+    options:[
+      "Se puede devolver sin costo alguno",
+      "Exige “probarse” —consumirse— en cada transacción para valorarlo plenamente",
+      "Su calidad es siempre observable antes de la compra",
+      "No genera ninguna incertidumbre en el comprador"
+    ],
+    correct:1,
+    explain:"El zapato se prueba una sola vez antes de comprarlo; un bien informativo (un libro, un modelo predictivo) exige “probarse” en cada transacción —de ahí el papel de la marca y la reputación como mecanismos que abaratan esa incertidumbre precontractual (Bloque 4)."
+  },
+  {
+    tema:"1.2",
+    text:"La nota técnica “Riqueza de información ⇒ Escasez de atención del consumidor” se atribuye, en clase, a:",
+    options:[
+      "Ronald Coase (1937)",
+      "Herbert Simon (1971), citado en Shapiro y Varian (2000)",
+      "Nicholas Negroponte (1995)",
+      "Goldfarb y Tucker (2019)"
+    ],
+    correct:1,
+    explain:"Herbert Simon (1971) anticipó, dos décadas antes de la comercialización de internet, que la digitalización no altera la cantidad total de información disponible, sino su accesibilidad —lo que genera escasez de atención (Bloque 4)."
+  },
+  {
+    tema:"1.3",
+    text:"El efecto de “datificación como subproducto de consumo” del Internet de las Cosas se ilustra mejor con:",
+    options:[
+      "Un termostato inteligente que genera datos de uso para mejorar su propio algoritmo de eficiencia energética",
+      "Un motor de avión que se vende una sola vez y nunca se monitorea",
+      "Un libro impreso sin ningún sensor",
+      "Una tienda física sin sistema de punto de venta"
+    ],
+    correct:0,
+    explain:"Cada interacción física con un dispositivo IoT genera un flujo de datos d_t que, acumulado, constituye un activo intangible con rendimientos crecientes en el aprendizaje automático (Bloque 5, 1.3) — el termostato inteligente es el ejemplo canónico visto en clase."
+  },
+  {
+    tema:"1.3",
+    text:"El esquema “power-by-the-hour” de los motores Rolls-Royce, discutido en clase, ilustra específicamente:",
+    options:[
+      "Nuevas externalidades de red entre dispositivos",
+      "Precios basados en uso p(u), habilitados por la reducción de asimetrías de información vía monitoreo IoT",
+      "El problema del bien de experiencia",
+      "La condición de Coase sobre los límites de la firma"
+    ],
+    correct:1,
+    explain:"En vez de vender el motor, la empresa cobra por hora de vuelo, usando sensores para monitorear el desgaste real — el ejemplo específico de precios por uso p(u) en lugar de precio por unidad p·Q, visto en el Bloque 5."
+  },
+  {
+    tema:"1.4",
+    text:"La condición de Coase (1937) establece que la firma internaliza una actividad cuando:",
+    options:[
+      "El costo de coordinarla vía mercado (TC^mercado) supera al de coordinarla internamente más los costos de agencia",
+      "El gobierno lo exige por regulación",
+      "La actividad genera cero costos de transacción en cualquier caso",
+      "La firma tiene más empleados que sus competidores"
+    ],
+    correct:0,
+    explain:"TC^mercado > TC^firma + costos de agencia interna ⟹ la firma internaliza. Es la condición formal derivada en el Bloque 6 (1.4) para explicar los límites de la firma."
+  },
+  {
+    tema:"1.4",
+    text:"¿Cuál de los siguientes NO forma parte de la taxonomía de cinco costos de transacción de Goldfarb y Tucker (2019) vista en clase?",
+    options:[
+      "Búsqueda",
+      "Verificación",
+      "Rastreo (tracking)",
+      "Costos regulatorios"
+    ],
+    correct:3,
+    explain:"Los cinco costos son: búsqueda, replicación, transporte, rastreo y verificación (Bloque 6). “Costos regulatorios” no forma parte de esta taxonomía específica."
+  },
+  {
+    tema:"1.4",
+    text:"Ejercicio numérico: dada C(Q) = F* + c*Q con F* = 800,000 y c* = 0.05, ¿cuál es la escala mínima eficiente aproximada Q para alcanzar AC(Q) ≤ 1.20·c*?",
+    options:[
+      "8,000,000",
+      "16,000,000",
+      "80,000,000",
+      "800,000,000"
+    ],
+    correct:2,
+    explain:"AC(Q) ≤ 1.20c* ⟺ F*/Q ≤ 0.20·c* = 0.01. Despejando: Q ≥ F*/0.01 = 800,000/0.01 = <b>80,000,000</b>. Mismo procedimiento del ejercicio guiado del Bloque 7, con cifras distintas: identifique primero el margen permitido (0.20·c*) antes de despejar Q."
+  }
+];
+
+const TEMA_META = {
+  "1.1":{label:"1.1 · Digitalización de la economía", color:"#005ab5"},
+  "1.2":{label:"1.2 · Bienes tradicionales y digitales", color:"#c99735"},
+  "1.3":{label:"1.3 · Internet de las cosas", color:"#1f7a4d"},
+  "1.4":{label:"1.4 · Costos de transacción", color:"#8a4baf"}
+};
+const TEMA_ORDER = ["1.1","1.2","1.3","1.4"];
+const LETTERS = ["A","B","C","D"];
+
+const quizBody = document.getElementById("quiz-body");
+let lastTema = null;
+let answered = {};
+
+QUESTIONS.forEach((q, qi) => {
+  if(q.tema !== lastTema){
+    lastTema = q.tema;
+    const meta = TEMA_META[q.tema];
+    const divider = document.createElement("div");
+    divider.className = "tema-divider";
+    divider.innerHTML = `
+      <div class="tema-num" style="color:${meta.color}">${TEMA_ORDER.indexOf(q.tema)+1}</div>
+      <div class="tema-heading">
+        <h2>${meta.label}</h2>
+        <div class="tema-sub">Sesión 1 del curso</div>
+      </div>
+      <div class="rule"></div>`;
+    quizBody.appendChild(divider);
+  }
+
+  const card = document.createElement("div");
+  card.className = "q-card";
+  card.id = "q-" + qi;
+
+  const optsHtml = q.options.map((opt, oi) => `
+    <li class="opt" data-qi="${qi}" data-oi="${oi}">
+      <input type="radio" name="q${qi}" id="q${qi}o${oi}" value="${oi}">
+      <span class="opt-letter">${LETTERS[oi]}</span>
+      <label for="q${qi}o${oi}" style="cursor:pointer; flex:1;">${opt}</label>
+    </li>`).join("");
+
+  card.innerHTML = `
+    <div class="q-head">
+      <div class="q-index">${qi+1}</div>
+      <div class="q-text">${q.text}</div>
+    </div>
+    <ul class="options">${optsHtml}</ul>
+    <div class="explain"><b>Solución y discusión.</b> ${q.explain}</div>
+  `;
+  quizBody.appendChild(card);
+});
+
+quizBody.addEventListener("click", (e) => {
+  const row = e.target.closest(".opt");
+  if(!row || row.classList.contains("disabled")) return;
+  const qi = +row.dataset.qi, oi = +row.dataset.oi;
+  const radio = document.getElementById(`q${qi}o${oi}`);
+  radio.checked = true;
+  answered[qi] = oi;
+
+  const card = document.getElementById("q-"+qi);
+  card.classList.add("answered");
+  card.querySelectorAll(".opt").forEach(o => o.classList.remove("selected"));
+  row.classList.add("selected");
+
+  updateProgress();
+});
+
+function updateProgress(){
+  const n = Object.keys(answered).length;
+  const total = QUESTIONS.length;
+  document.getElementById("progress-label").textContent = `${n} / ${total} respondidas`;
+  document.getElementById("progress-fill").style.width = (n/total*100) + "%";
+  const btn = document.getElementById("btn-submit");
+  const hint = document.getElementById("hint-remaining");
+  if(n === total){
+    btn.disabled = false;
+    hint.textContent = "Todas las preguntas respondidas — puede enviar cuando guste.";
+  } else {
+    btn.disabled = true;
+    hint.textContent = `Responda los ${total} reactivos para habilitar el envío (faltan ${total-n}).`;
+  }
+}
+
+document.getElementById("btn-submit").addEventListener("click", () => {
+  let correctCount = 0;
+  const temaStats = {};
+  TEMA_ORDER.forEach(t => temaStats[t] = {correct:0, total:0});
+
+  QUESTIONS.forEach((q, qi) => {
+    const card = document.getElementById("q-"+qi);
+    const sel = answered[qi];
+    const isCorrect = sel === q.correct;
+    if(isCorrect) correctCount++;
+    temaStats[q.tema].total++;
+    if(isCorrect) temaStats[q.tema].correct++;
+
+    card.classList.add("revealed");
+    card.querySelectorAll(".opt").forEach(o => {
+      o.classList.add("disabled");
+      const oi = +o.dataset.oi;
+      if(oi === q.correct) o.classList.add("correct-answer");
+      else if(oi === sel) o.classList.add("wrong-answer");
+    });
+
+    const head = card.querySelector(".q-head");
+    let tag = document.createElement("span");
+    tag.className = "tag " + (isCorrect ? "ok" : "bad");
+    tag.textContent = isCorrect ? "Correcto" : "Incorrecto";
+    head.appendChild(tag);
+  });
+
+  const pct = Math.round(correctCount / QUESTIONS.length * 100);
+
+  document.getElementById("score-ring").style.setProperty("--pct", pct);
+  document.getElementById("score-ring-text").textContent = pct + "%";
+
+  let headline;
+  if(pct >= 90){ headline = "Dominio sólido del Tema 1"; }
+  else if(pct >= 70){ headline = "Buen dominio, con puntos específicos de repaso"; }
+  else if(pct >= 50){ headline = "Base parcial — conviene repasar antes de la Sesión 2"; }
+  else { headline = "Se recomienda repasar el Tema 1 antes de la Sesión 2"; }
+  document.getElementById("report-headline").textContent = headline;
+  document.getElementById("report-sub").textContent = `${correctCount} de ${QUESTIONS.length} reactivos correctos.`;
+
+  const barsWrap = document.getElementById("tema-bars");
+  barsWrap.innerHTML = "";
+  let weakest = null;
+  TEMA_ORDER.forEach(t => {
+    const s = temaStats[t];
+    if(s.total === 0) return;
+    const tp = Math.round(s.correct/s.total*100);
+    if(weakest === null || tp < weakest.pct) weakest = {tema:t, pct:tp};
+    const meta = TEMA_META[t];
+    const row = document.createElement("div");
+    row.className = "tema-bar-row";
+    row.innerHTML = `
+      <div class="tema-bar-label">${meta.label}</div>
+      <div class="tema-bar-track"><div class="tema-bar-fill" style="width:${tp}%; background:${meta.color}"></div></div>
+      <div class="tema-bar-pct">${s.correct}/${s.total}</div>`;
+    barsWrap.appendChild(row);
+  });
+
+  const diag = document.getElementById("diagnosis");
+  const blockMap = {
+    "1.1":"Bloque 3 de la Sesión 1: digitalización, estructura de costos F*/c*, derivación de AC(Q).",
+    "1.2":"Bloque 4 de la Sesión 1: las cuatro propiedades de Shapiro y Varian, el bien de experiencia, escasez de atención.",
+    "1.3":"Bloque 5 de la Sesión 1: los tres efectos económicos del Internet de las Cosas.",
+    "1.4":"Bloque 6–7 de la Sesión 1: la condición de Coase, la taxonomía de Goldfarb y Tucker, y el ejercicio de escala mínima eficiente."
+  };
+  let diagHtml = `<h4>Diagnóstico por subtema</h4>`;
+  if(weakest && weakest.pct < 70){
+    diagHtml += `<p>Su área con mayor margen de mejora es <b>${TEMA_META[weakest.tema].label}</b> (${weakest.pct}% de aciertos). Se sugiere repasar:</p><ul><li>${blockMap[weakest.tema]}</li></ul>`;
+  } else {
+    diagHtml += `<p>Su desempeño es parejo entre los cuatro subtemas de la Sesión 1 — buena base para avanzar a la Sesión 2 (mercados digitales, efectos de red).</p>`;
+  }
+  diag.innerHTML = diagHtml;
+
+  document.getElementById("results").style.display = "block";
+  document.getElementById("submit-zone").style.display = "none";
+  document.getElementById("results").scrollIntoView({behavior:"smooth", block:"start"});
+});
+
+document.getElementById("btn-review").addEventListener("click", () => {
+  document.getElementById("quiz-body").scrollIntoView({behavior:"smooth", block:"start"});
+});
+
+document.getElementById("btn-reset").addEventListener("click", () => {
+  window.location.reload();
+});
+
+updateProgress();
+</script>
+</body>
+</html>
